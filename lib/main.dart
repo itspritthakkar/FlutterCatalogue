@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'screens/home.dart';
 import 'screens/login.dart';
@@ -14,11 +15,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+      ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
-      // initialRoute: "/login",
+      initialRoute: "/login",
       routes: {
         "/": (context) => const Home(),
         "/login": (context) => const Login(),

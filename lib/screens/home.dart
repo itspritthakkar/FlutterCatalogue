@@ -14,7 +14,15 @@ class Home extends StatelessWidget {
         title: const Text("Catalog App")
       ),
       body: Center(
-        child: Text("We love $days referred by $position"),
+        child: Text(
+          "We love $days referred by $position",
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 40,
+            color: Colors.deepPurple
+          ),
+        ),
       ),
       drawer: const Drawer(),
     );

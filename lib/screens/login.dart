@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/utils/routes.dart';
 // ignore: camel_case_types
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -38,11 +39,16 @@ class Login extends StatelessWidget {
                   const SizedBox(height: 20.00),
                   ElevatedButton(
                       onPressed: () {
-                        if (kDebugMode) {
-                          print("Button pressed");
-                        }
+                        // if (kDebugMode) {
+                        //   print("Button pressed");
+                        // }else{
+                          Navigator.pushNamed(context, AppRoutes.homeRoute);
+                        // }
                       }, 
-                      child: const Text("Login")
+                      child: const Text("Login"),
+                    style: TextButton.styleFrom(minimumSize: const Size(120, 40), shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),),
                   )
                 ],
               ),

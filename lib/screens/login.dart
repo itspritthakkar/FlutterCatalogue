@@ -13,25 +13,44 @@ class _LoginState extends State<Login> {
   String username = "";
   bool changeButton = false;
 
+  final _formKey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if(_formKey.currentState!.validate()){
+      setState(() {
+        changeButton = true;
+      });
+
+      await Future.delayed(const Duration(seconds: 1));
+      await Navigator.pushNamed(context, AppRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset : false,
       body: SingleChildScrollView(
-          child: Column(
+          child: Form(
+        key: _formKey,
+        child: Column(
           children: [
             Image.asset(
               "assets/images/login.jpg",
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 20.00),
-            Text("Welcome$username!",
-                style:
-                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            Text(
+                "Welcome$username!",
+                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
+            ),
             const SizedBox(height: 20.00),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 42.0),
               child: Column(
                 children: [
                   TextFormField(
@@ -44,8 +63,18 @@ class _LoginState extends State<Login> {
                       fillColor: Colors.deepPurpleAccent.withOpacity(0.4),
                       filled: true,
                     ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Username cannot be empty";
+                      }
+                      return null;
+                    },
                     onChanged: (value) {
-                      username = " " + value;
+                      if(value == ""){
+                        username = "";
+                      }else{
+                        username = " " + value;
+                      }
                       setState(() {});
                     },
                   ),
@@ -61,33 +90,40 @@ class _LoginState extends State<Login> {
                       fillColor: Colors.deepPurpleAccent.withOpacity(0.4),
                       filled: true,
                     ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password cannot be empty";
+                      } else if(value.length < 8) {
+                        return "Password must be atleast 8 characters long";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 20.00),
-                  InkWell(
-                    onTap: () async {
-                      setState(() {
-                        changeButton = true;
-                      });
-
-                      await Future.delayed(const Duration(seconds: 1));
-                      Navigator.pushNamed(context, AppRoutes.homeRoute);
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      width: changeButton ? 50 : 120,
-                      height: 45,
-                      alignment: Alignment.center,
-                      child: changeButton ? const Icon(Icons.done, color: Colors.white,) : const Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                  Material(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(changeButton ? 10 : 8),
+                    child: InkWell(
+                      onTap: () => moveToHome(context),
+                      child: AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeOutQuart,
+                        width: changeButton ? 60 : 330,
+                        height: 55,
+                        alignment: Alignment.center,
+                        child: changeButton
+                            ? const Icon(
+                                Icons.done,
+                                color: Colors.white,
+                              )
+                            : const Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
                       ),
-                      decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          borderRadius:
-                              BorderRadius.circular(changeButton ? 10 : 8)),
                     ),
                   ),
                   // ElevatedButton(
@@ -107,6 +143,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ],
+        ),
       )),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widgets/drawer.dart';
 
 // ignore: camel_case_types
 class Home extends StatelessWidget {
@@ -6,25 +7,28 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int days = 69;
-    String position = "upndown";
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Catalog App")
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
+        title: const Text(
+            "Catalog App",
+          style: TextStyle(color: Colors.black),
+        )
       ),
-      body: Center(
+      body: const Center(
         child: Text(
-          "We love $days referred by $position",
+          "Hey there! Welcome to home.",
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 40,
             color: Colors.deepPurple
           ),
         ),
       ),
-      drawer: const Drawer(),
+      drawer: const AppDrawer(),
     );
   }
 }

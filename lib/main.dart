@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primarySwatch: Colors.deepPurple,
           fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
       darkTheme: ThemeData(

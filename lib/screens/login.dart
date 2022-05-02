@@ -53,51 +53,75 @@ class _LoginState extends State<Login> {
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 42.0),
               child: Column(
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide.none,
+                  Container(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: "Username",
+                        fillColor: Colors.deepPurpleAccent.withOpacity(0.2),
+                        filled: true,
                       ),
-                      hintText: "Username",
-                      fillColor: Colors.deepPurpleAccent.withOpacity(0.4),
-                      filled: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Username cannot be empty";
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        if(value == ""){
+                          username = "";
+                        }else{
+                          username = " " + value;
+                        }
+                        setState(() {});
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Username cannot be empty";
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      if(value == ""){
-                        username = "";
-                      }else{
-                        username = " " + value;
-                      }
-                      setState(() {});
-                    },
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 4,
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 10.00),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide.none,
+                  Container(
+                    child: TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: "Password",
+                        fillColor: Colors.deepPurpleAccent.withOpacity(0.2),
+                        filled: true,
                       ),
-                      hintText: "Password",
-                      fillColor: Colors.deepPurpleAccent.withOpacity(0.4),
-                      filled: true,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password cannot be empty";
+                        } else if(value.length < 8) {
+                          return "Password must be atleast 8 characters long";
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Password cannot be empty";
-                      } else if(value.length < 8) {
-                        return "Password must be atleast 8 characters long";
-                      }
-                      return null;
-                    },
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 4,
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 20.00),
                   Material(

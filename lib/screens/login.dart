@@ -82,7 +82,7 @@ class _LoginState extends State<Login> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.deepPurpleAccent.withOpacity(0.2),
                           spreadRadius: 4,
                           blurRadius: 15,
                           offset: const Offset(0, 5),
@@ -115,7 +115,7 @@ class _LoginState extends State<Login> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.deepPurpleAccent.withOpacity(0.2),
                           spreadRadius: 4,
                           blurRadius: 15,
                           offset: const Offset(0, 5),

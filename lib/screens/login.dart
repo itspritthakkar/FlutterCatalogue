@@ -64,12 +64,12 @@ class _LoginState extends State<Login> {
                         fillColor: Colors.deepPurpleAccent.withOpacity(0.2),
                         filled: true,
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Username cannot be empty";
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return "Username cannot be empty";
+                      //   }
+                      //   return null;
+                      // },
                       onChanged: (value) {
                         if(value == ""){
                           username = "";
@@ -103,14 +103,14 @@ class _LoginState extends State<Login> {
                         fillColor: Colors.deepPurpleAccent.withOpacity(0.2),
                         filled: true,
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Password cannot be empty";
-                        } else if(value.length < 8) {
-                          return "Password must be atleast 8 characters long";
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return "Password cannot be empty";
+                      //   } else if(value.length < 8) {
+                      //     return "Password must be atleast 8 characters long";
+                      //   }
+                      //   return null;
+                      // },
                     ),
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                       onTap: () => moveToHome(context),
                       child: AnimatedContainer(
                         duration: const Duration(seconds: 1),
-                        curve: Curves.easeOutQuart,
+                        curve: Curves.easeOutCubic,
                         width: changeButton ? 60 : 330,
                         height: 55,
                         alignment: Alignment.center,

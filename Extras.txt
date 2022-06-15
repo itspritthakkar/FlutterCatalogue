@@ -1,0 +1,50 @@
+home.dart
+
+/** Sticky Layout Bar **/
+    // body: Column(
+    //   children: [
+    //     Padding(
+    //       padding: const EdgeInsets.all(16.0),
+    //       child: Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           const Text(
+    //               "Layouts",
+    //             style: TextStyle(
+    //               fontSize: 20
+    //             ),
+    //           ),
+    //           Row(
+    //             children: const [
+    //               Icon(
+    //                 CupertinoIcons.rectangle_grid_1x2
+    //               ),
+    //               SizedBox(width: 10,),
+    //               Icon(
+    //                   CupertinoIcons.rectangle_grid_2x2
+    //               ),
+    //             ],
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //     Expanded(
+    //       child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)? GridView.builder(
+    //           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    //               crossAxisCount: 2,
+    //             crossAxisSpacing: 3,
+    //             mainAxisSpacing: 3,
+    //             mainAxisExtent: 240.0
+    //           ),
+    //           itemBuilder: (context, index) =>
+    //                   GridWidget(
+    //                       item: CatalogModel.items![index]
+    //                   ),
+    //         itemCount: CatalogModel.items?.length,
+    //       ):
+    //         const Center(
+    //           child: CircularProgressIndicator(),
+    //         ),
+    //     ),
+    //   ],
+    // ),

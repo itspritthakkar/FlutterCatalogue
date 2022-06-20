@@ -38,11 +38,11 @@ class _LoginState extends State<Login> {
         key: _formKey,
         child: Column(
           children: [
+            const SizedBox(height: 40.00),
             Image.asset(
-              "assets/images/login.jpg",
+              "assets/images/login.png",
               fit: BoxFit.cover,
             ),
-            const SizedBox(height: 20.00),
             Text(
                 "Welcome$username!",
                 style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
@@ -79,16 +79,6 @@ class _LoginState extends State<Login> {
                         setState(() {});
                       },
                     ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.deepPurpleAccent.withOpacity(0.2),
-                          spreadRadius: 4,
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
                   ),
                   const SizedBox(height: 10.00),
                   Container(
@@ -112,20 +102,10 @@ class _LoginState extends State<Login> {
                       //   return null;
                       // },
                     ),
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.deepPurpleAccent.withOpacity(0.2),
-                          spreadRadius: 4,
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
                   ),
                   const SizedBox(height: 20.00),
                   Material(
-                    color: Colors.deepPurple,
+                    color: Colors.indigo,
                     borderRadius: BorderRadius.circular(changeButton ? 10 : 8),
                     child: InkWell(
                       onTap: () => moveToHome(context),

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
-import 'package:myapp/widgets/themes.dart';
+import 'package:myapp/widgets/like_widget.dart';
 
 import '../../models/catalog.dart';
 
@@ -9,22 +8,12 @@ import '../../models/catalog.dart';
 class GridWidget extends StatelessWidget {
   final Item item;
 
-  Future<bool> onLikeButtonTapped(bool isLiked) async{
-    /// send your request here
-    // final bool success= await sendRequest();
-
-    /// if failed, you can do nothing
-    // return success? !isLiked:isLiked;
-    item.isLiked=!isLiked;
-    return !isLiked;
-  }
-
   const GridWidget({Key? key, required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       clipBehavior: Clip.antiAlias,
       elevation: 0.3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -40,7 +29,7 @@ class GridWidget extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                      color: AppTheme.creamColor),
+                      color: Theme.of(context).canvasColor),
                       margin: const EdgeInsets.only(right: 10.0, left: 10.0),
                       alignment: Alignment.center,
                         child: Hero(
@@ -51,29 +40,7 @@ class GridWidget extends StatelessWidget {
                     Positioned(
                       right: 15,
                       top: 5,
-                      child: SizedBox(
-                        width: 25,
-                        height: 25,
-                        child: LikeButton(
-                          isLiked: item.isLiked,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          size: 20,
-                          onTap: onLikeButtonTapped,
-                          circleColor:
-                          const CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                          bubblesColor: const BubblesColor(
-                            dotPrimaryColor: Color(0xff33b5e5),
-                            dotSecondaryColor: Color(0xff0099cc),
-                          ),
-                          likeBuilder: (bool isLiked) {
-                            return Icon(
-                              isLiked ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
-                              color: isLiked ? Colors.red : Colors.black,
-                              size: 25,
-                            );
-                          }
-                          ),
-                      ),
+                      child: LikeWidget(item: item),
                     ),
                   ],
                 ),
@@ -102,26 +69,40 @@ class GridWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 14.0),
-            child: Material(
-                color: Colors.black,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: InkWell(
-                  onTap: () => {
-                    debugPrint(item.name)
-                  },
-                  child: const SizedBox(
-                    width: 100,
-                    height: 35,
-                    child: Center(
-                      child: Text(
-                        "Buy Now",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                    onTap: () async {
+
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(CupertinoIcons.cart_badge_plus),
+                    )
+                ),
+                Material(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    child: InkWell(
+                      onTap: () => {
+                        debugPrint(item.name)
+                      },
+                      child: const SizedBox(
+                        width: 70,
+                        height: 35,
+                        child: Center(
+                          child: Text(
+                            "Buy",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                )
+                    )
+                ),
+              ],
             ),
           )
         ],

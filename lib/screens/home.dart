@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp/models/catalog.dart';
-import 'package:myapp/widgets/themes.dart';
 import 'package:myapp/widgets/home_widgets/catalog_header.dart';
 import 'package:myapp/widgets/home_widgets/grid_layout.dart';
 import 'package:myapp/widgets/home_widgets/list_layout.dart';
@@ -57,7 +56,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.creamColor,
+      backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -91,7 +90,7 @@ class _HomeState extends State<Home> {
                                             changeLayout("list")
                                           },
                                           child: const Icon(
-                                              CupertinoIcons.rectangle_grid_1x2
+                                              CupertinoIcons.rectangle_grid_1x2,
                                           ),
                                         ),
                                       ),

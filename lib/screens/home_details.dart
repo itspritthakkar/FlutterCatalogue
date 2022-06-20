@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
 import 'package:myapp/models/catalog.dart';
-import 'package:myapp/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../widgets/like_widget.dart';
 
 class HomeDetails extends StatelessWidget {
   final Item catalog;
@@ -26,37 +25,19 @@ class HomeDetails extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         actions: [
-          LikeButton(
-              isLiked: catalog.isLiked,
-              mainAxisAlignment: MainAxisAlignment.end,
-              size: 20,
-              onTap: onLikeButtonTapped,
-              circleColor:
-              const CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
-              bubblesColor: const BubblesColor(
-                dotPrimaryColor: Color(0xff33b5e5),
-                dotSecondaryColor: Color(0xff0099cc),
-              ),
-              likeBuilder: (bool isLiked) {
-                return Icon(
-                  isLiked ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
-                  color: isLiked ? Colors.red : Colors.black,
-                  size: 25,
-                );
-              }
-          ).pOnly(right: 16)
+          LikeWidget(item: catalog).pOnly(right: 16)
         ],
       ),
-      backgroundColor: AppTheme.creamColor,
+      backgroundColor: Theme.of(context).canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.zero,
           children: [
             "\$${catalog.price}".text.bold.xl4.make(),
             Material(
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.primaryContainer,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: InkWell(
                   onTap: () => {
@@ -91,12 +72,12 @@ class HomeDetails extends StatelessWidget {
                   arcType: VxArcType.CONVEY,
                   edge: VxEdge.TOP,
                   child: Container(
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                     width: context.screenWidth,
                     child: Column(
                       children: [
                         catalog.name.text.xl4
-                            .color(AppTheme.darkBluishColor)
+                            .color(Theme.of(context).colorScheme.primary)
                             .bold
                             .make(),
                         catalog.desc.text.textStyle(context.captionStyle).xl.make(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/models/catalog.dart';
+import 'package:myapp/models/CatalogModel.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/like_widget.dart';

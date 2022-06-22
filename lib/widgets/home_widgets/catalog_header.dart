@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myapp/screens/cart.dart';
 
-class CatalogHeader extends StatelessWidget {
-  const CatalogHeader({Key? key}) : super(key: key);
+class CatalogHeader extends StatefulWidget {
+  const CatalogHeader({Key? key, required this.onChanged}) : super(key: key);
+
+  final ValueChanged<bool> onChanged;
+
+  @override
+  State<CatalogHeader> createState() => _CatalogHeaderState();
+}
+
+class _CatalogHeaderState extends State<CatalogHeader> {
+
+  void _handleTap() {
+    widget.onChanged(true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +40,7 @@ class CatalogHeader extends StatelessWidget {
                           builder: (context) => const Cart()
                       )
                   );
+                  _handleTap();
                 },
                   child: const Icon(CupertinoIcons.cart)
               )

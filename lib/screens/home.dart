@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/models/catalog.dart';
+import 'package:myapp/models/CatalogModel.dart';
 import 'package:myapp/widgets/home_widgets/catalog_header.dart';
 import 'package:myapp/widgets/home_widgets/grid_layout.dart';
 import 'package:myapp/widgets/home_widgets/list_layout.dart';
@@ -37,7 +37,6 @@ class _HomeState extends State<Home> {
   }
 
   changeLayout(String type) async {
-    if(currentLayout!=type){
       isProcessing = true;
       setState((){});
       await Future.delayed(const Duration(seconds: 1));
@@ -50,11 +49,15 @@ class _HomeState extends State<Home> {
       }
       isProcessing = false;
       setState((){});
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    bool valChanged = false;
+    void _redrawHome(bool isChanged) {
+      setState(() {valChanged=isChanged;});
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
@@ -63,7 +66,7 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CatalogHeader(),
+              CatalogHeader(onChanged: _redrawHome),
               if (CatalogModel.items != null && CatalogModel.items!.isNotEmpty && isProcessing==false)
                 Expanded(
                   child: CustomScrollView(
@@ -113,7 +116,7 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-                      currentLayout=="grid" ? const GridLayout(): const ListLayout()
+                      currentLayout=="grid" ? GridLayout(valChanged: valChanged): ListLayout(valChanged: valChanged)
                     ],
                   ),
                 )

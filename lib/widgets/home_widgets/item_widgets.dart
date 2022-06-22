@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-import '../../models/catalog.dart';
+import '../../models/CatalogModel.dart';
+import '../delete_widget.dart';
 import '../like_widget.dart';
 
 class ItemWidget extends StatelessWidget {
   final Item catalog;
+
+  final String? type;
 
   Future<bool> onLikeButtonTapped(bool isLiked) async{
     /// send your request here
@@ -17,7 +20,7 @@ class ItemWidget extends StatelessWidget {
     return !isLiked;
   }
 
-  const ItemWidget({Key? key, required this.catalog}) : super(key: key);
+  const ItemWidget({Key? key, required this.catalog, this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +84,7 @@ class ItemWidget extends StatelessWidget {
                   Positioned(
                     right: 10,
                     top: 10,
-                    child: LikeWidget(item: catalog),
+                    child: type != "wishlist" ? LikeWidget(item: catalog): DeleteWidget(item: catalog),
                   )
                 ],
               ))

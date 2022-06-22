@@ -4,6 +4,7 @@ import 'package:myapp/config/palette.dart';
 
 class AppTheme{
   static ThemeData lightTheme(BuildContext context) => ThemeData(
+    useMaterial3: true,
     fontFamily: GoogleFonts.montserrat().fontFamily,
     cardColor: Colors.white,
     buttonTheme: ButtonThemeData(
@@ -12,16 +13,17 @@ class AppTheme{
     iconTheme: const IconThemeData(color: Colors.black),
     canvasColor: bgColor,
     appBarTheme: AppBarTheme(
-        color: Colors.white,
+        foregroundColor: Colors.black,
+        centerTitle: true,
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black),
         toolbarTextStyle: Theme.of(context).textTheme.bodyMedium,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge
     ),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Palette.darkBluish, brightness: Brightness.light).copyWith(primary: AppTheme.darkBluishColor, secondary: Colors.black, primaryContainer: Palette.darkBluish.shade800)
   );
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
+    useMaterial3: true,
     fontFamily: GoogleFonts.montserrat().fontFamily,
     cardColor: Colors.black26,
     buttonTheme: ButtonThemeData(
@@ -31,10 +33,11 @@ class AppTheme{
     canvasColor: darkBgColor,
     appBarTheme: AppBarTheme(
         color: Colors.black,
+        foregroundColor: Colors.white,
+        centerTitle: true,
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.white),
         toolbarTextStyle: Theme.of(context).textTheme.bodyMedium,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge
     ),
     colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue, brightness: Brightness.dark).copyWith(primary: Colors.white, secondary: Colors.indigo, primaryContainer: Colors.indigo),
   );

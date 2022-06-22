@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
-import '../models/catalog.dart';
+import '../models/CatalogModel.dart';
 
 class LikeWidget extends StatelessWidget {
   final Item item;

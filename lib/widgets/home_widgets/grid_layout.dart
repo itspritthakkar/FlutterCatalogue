@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:myapp/models/catalog.dart';
+import 'package:myapp/models/CatalogModel.dart';
 import '../../screens/home_details.dart';
 import 'grid_widgets.dart';
 
 class GridLayout extends StatefulWidget {
-  const GridLayout({Key? key}) : super(key: key);
+  const GridLayout({Key? key, this.valChanged}) : super(key: key);
+
+  final bool? valChanged;
 
   @override
   State<GridLayout> createState() => _GridLayoutState();
@@ -19,7 +20,7 @@ class _GridLayoutState extends State<GridLayout> {
         crossAxisCount: 2,
         crossAxisSpacing: 3,
         mainAxisSpacing: 3,
-        mainAxisExtent: 250.0,
+        mainAxisExtent: 260.0,
       ),
       delegate: SliverChildBuilderDelegate(
             (context, index) =>

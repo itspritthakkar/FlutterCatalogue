@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/like_widget.dart';
 
-import '../../models/catalog.dart';
+import '../../models/CatalogModel.dart';
 
 
 class GridWidget extends StatelessWidget {
@@ -56,14 +56,14 @@ class GridWidget extends StatelessWidget {
                             child: Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold),)
                         ),
                         const SizedBox(width: 7,),
-                        Text("\$${item.price.toString()}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+                        Text("\$${item.price.toString()}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
                     ],
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top:5.0, left: 10.0, right: 10.0),
                   alignment: Alignment.centerLeft,
-                    child: Text("${item.desc.substring(0, 20)}...", style: TextStyle(color: Colors.grey.shade600, fontSize: 13),)
+                    child: Text("${item.desc.substring(0, 18)}...", style: TextStyle(color: Colors.grey.shade600, fontSize: 13),)
                 ),
               ]
           ),

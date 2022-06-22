@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:myapp/screens/cart.dart';
 import 'package:myapp/utils/routes.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +10,18 @@ import 'screens/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // transparent status bar
-  ));
   runApp(const MyApp());
+  final window = WidgetsBinding.instance.window;
+  window.onPlatformBrightnessChanged = () {
+    var brightness = SchedulerBinding.instance.window.platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarIconBrightness: isDarkMode ? Brightness.light: Brightness.dark,
+      statusBarColor: Colors.transparent, // transparent status bar
+    ));
+    WidgetsBinding.instance.handlePlatformBrightnessChanged();
+  };
+  window.onPlatformBrightnessChanged!();
 }
 
 class MyApp extends StatelessWidget {

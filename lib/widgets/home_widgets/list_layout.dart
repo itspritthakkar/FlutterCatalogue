@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/models/catalog.dart';
+import 'package:myapp/models/CatalogModel.dart';
 import '../../screens/home_details.dart';
 import 'item_widgets.dart';
 
 class ListLayout extends StatefulWidget {
-  const ListLayout({Key? key}) : super(key: key);
+  final String? type;
+
+  final bool? valChanged;
+
+  const ListLayout({Key? key, this.type, this.valChanged}) : super(key: key);
 
   @override
   State<ListLayout> createState() => _ListLayoutState();
@@ -30,7 +34,8 @@ class _ListLayoutState extends State<ListLayout> {
                   setState(() {});
                 },
                 child: ItemWidget(
-                    catalog: CatalogModel.items![index]
+                    catalog: CatalogModel.items![index],
+                  type: widget.type,
                 ),
               ),
           childCount: CatalogModel.items?.length,

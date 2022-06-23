@@ -4,11 +4,12 @@ import '../../screens/home_details.dart';
 import 'item_widgets.dart';
 
 class ListLayout extends StatefulWidget {
+  final List<dynamic>? items;
   final String? type;
 
   final bool? valChanged;
 
-  const ListLayout({Key? key, this.type, this.valChanged}) : super(key: key);
+  const ListLayout({Key? key, this.type, this.valChanged, this.items}) : super(key: key);
 
   @override
   State<ListLayout> createState() => _ListLayoutState();
@@ -27,18 +28,18 @@ class _ListLayoutState extends State<ListLayout> {
                     MaterialPageRoute(
                       builder: (context) =>
                           HomeDetails(
-                            catalog: CatalogModel.items![index],
+                            catalog: widget.type == "wishlist" ? widget.items![index] : CatalogModel.items![index],
                           ),
                     ),
                   );
                   setState(() {});
                 },
                 child: ItemWidget(
-                    catalog: CatalogModel.items![index],
+                    catalog: widget.type == "wishlist" ? widget.items![index] : CatalogModel.items![index],
                   type: widget.type,
                 ),
               ),
-          childCount: CatalogModel.items?.length,
+          childCount: widget.items?.length ?? CatalogModel.items?.length,
         )
     );
   }

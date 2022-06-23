@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../models/CartModel.dart';
 import '../models/CatalogModel.dart';
 
 class DeleteWidget extends StatelessWidget {
@@ -10,13 +11,16 @@ class DeleteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 25,
-      height: 25,
-      child: Icon(
-        CupertinoIcons.multiply,
-        color: Colors.grey,
-        size: 20,
+    return InkWell(
+      onTap: () => RemoveMutation(item),
+      child: const SizedBox(
+        width: 25,
+        height: 25,
+        child: Icon(
+          CupertinoIcons.multiply,
+          color: Colors.grey,
+          size: 20,
+        ),
       ),
     );
   }

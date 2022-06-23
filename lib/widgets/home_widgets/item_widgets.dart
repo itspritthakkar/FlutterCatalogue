@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/widgets/home_widgets/add_to_cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../models/CatalogModel.dart';
 import '../delete_widget.dart';
@@ -47,13 +47,8 @@ class ItemWidget extends StatelessWidget {
                         children: [
                           "\$${catalog.price}".text.bold.xl.make(),
                           Row(
-                            children: [
-                              InkWell(
-                                onTap: () async {
-
-                                },
-                                  child: const Icon(CupertinoIcons.cart_badge_plus).pOnly(right: 8)
-                              ),
+                            children: type=="wishlist" ? [] : [
+                              AddToCart(catalog: catalog),
                               Material(
                                   color: Theme.of(context).colorScheme.primaryContainer,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

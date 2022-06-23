@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/models/CatalogModel.dart';
+import 'package:myapp/widgets/home_widgets/add_to_cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/like_widget.dart';
@@ -36,25 +37,30 @@ class HomeDetails extends StatelessWidget {
           buttonPadding: EdgeInsets.zero,
           children: [
             "\$${catalog.price}".text.bold.xl4.make(),
-            Material(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: InkWell(
-                  onTap: () => {
-                    debugPrint(catalog.name)
-                  },
-                  child: const SizedBox(
-                    child: Center(
-                      child: Text(
-                        "Buy",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15),
+            Row(
+              children: [
+                AddToCart(catalog: catalog),
+                Material(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    child: InkWell(
+                      onTap: () => {
+                        debugPrint(catalog.name)
+                      },
+                      child: const SizedBox(
+                        child: Center(
+                          child: Text(
+                            "Buy",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                )
-            ).wh(100, 50)
+                    )
+                ).wh(100, 50),
+              ],
+            )
           ],
         ).p16(),
       ),

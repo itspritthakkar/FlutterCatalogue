@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/like_widget.dart';
 
 import '../../models/CatalogModel.dart';
+import 'add_to_cart.dart';
 
 
 class GridWidget extends StatelessWidget {
@@ -72,15 +72,7 @@ class GridWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkWell(
-                    onTap: () async {
-
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Icon(CupertinoIcons.cart_badge_plus),
-                    )
-                ),
+                AddToCart(catalog: item),
                 Material(
                     color: Theme.of(context).colorScheme.primaryContainer,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

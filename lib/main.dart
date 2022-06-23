@@ -4,13 +4,15 @@ import 'package:myapp/screens/cart.dart';
 import 'package:myapp/utils/routes.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
+import 'core/store.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(VxState(store: MyStore(), child: const MyApp()));
   final window = WidgetsBinding.instance.window;
   window.onPlatformBrightnessChanged = () {
     var brightness = SchedulerBinding.instance.window.platformBrightness;

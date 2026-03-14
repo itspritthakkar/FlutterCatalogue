@@ -16,13 +16,14 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    if(_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       setState(() {
         changeButton = true;
       });
 
       await Future.delayed(const Duration(seconds: 1));
-      await Navigator.pushNamed(context, AppRoutes.homeRoute);
+      if (!mounted) return;
+      await Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
       setState(() {
         changeButton = false;
       });
@@ -32,6 +33,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).canvasColor,
       // resizeToAvoidBottomInset : false,
       body: SingleChildScrollView(
           child: Form(
@@ -43,10 +45,9 @@ class _LoginState extends State<Login> {
               "assets/images/login.png",
               fit: BoxFit.cover,
             ),
-            Text(
-                "Welcome$username!",
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
-            ),
+            Text("Welcome$username!",
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20.00),
             Padding(
               padding:
@@ -63,17 +64,17 @@ class _LoginState extends State<Login> {
                       fillColor: Colors.grey.withOpacity(0.2),
                       filled: true,
                     ),
-                    // validator: (value) {
-                    //   if (value!.isEmpty) {
-                    //     return "Username cannot be empty";
-                    //   }
-                    //   return null;
-                    // },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Username cannot be empty";
+                      }
+                      return null;
+                    },
                     onChanged: (value) {
-                      if(value == ""){
+                      if (value == "") {
                         username = "";
-                      }else{
-                        username = " " + value;
+                      } else {
+                        username = " $value";
                       }
                       setState(() {});
                     },
@@ -90,14 +91,14 @@ class _LoginState extends State<Login> {
                       fillColor: Colors.grey.withOpacity(0.2),
                       filled: true,
                     ),
-                    // validator: (value) {
-                    //   if (value!.isEmpty) {
-                    //     return "Password cannot be empty";
-                    //   } else if(value.length < 8) {
-                    //     return "Password must be atleast 8 characters long";
-                    //   }
-                    //   return null;
-                    // },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password cannot be empty";
+                      } else if (value.length < 8) {
+                        return "Password must be atleast 8 characters long";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 20.00),
                   Material(
@@ -126,19 +127,6 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                   ),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       // if (kDebugMode) {
-                  //       //   print("Button pressed");
-                  //       // }else{
-                  //         Navigator.pushNamed(context, AppRoutes.homeRoute);
-                  //       // }
-                  //     },
-                  //     child: const Text("Login"),
-                  //   style: TextButton.styleFrom(minimumSize: const Size(120, 40), shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.circular(30.0),
-                  //   ),),
-                  // )
                 ],
               ),
             ),

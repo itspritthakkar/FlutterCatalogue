@@ -1,3 +1,7 @@
+import 'package:velocity_x/velocity_x.dart';
+
+import '../core/store.dart';
+
 class CatalogModel {
   static List<Item>? items;
 
@@ -18,15 +22,14 @@ class Item {
 
 //<editor-fold desc="Data Methods">
 
-  Item({
-    required this.id,
-    required this.name,
-    required this.desc,
-    required this.price,
-    required this.color,
-    required this.image,
-    required this.isLiked
-  });
+  Item(
+      {required this.id,
+      required this.name,
+      required this.desc,
+      required this.price,
+      required this.color,
+      required this.image,
+      required this.isLiked});
 
   @override
   bool operator ==(Object other) =>
@@ -109,4 +112,26 @@ class Item {
   }
 
 //</editor-fold>
+}
+
+class AddLike extends VxMutation<MyStore> {
+  final Item item;
+
+  AddLike(this.item);
+
+  @override
+  perform() {
+    item.isLiked = true;
+  }
+}
+
+class RemoveLike extends VxMutation<MyStore> {
+  final Item item;
+
+  RemoveLike(this.item);
+
+  @override
+  perform() {
+    item.isLiked = false;
+  }
 }

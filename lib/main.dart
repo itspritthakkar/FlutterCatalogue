@@ -18,7 +18,7 @@ void main() {
     var brightness = SchedulerBinding.instance.window.platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarIconBrightness: isDarkMode ? Brightness.light: Brightness.dark,
+      statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
       statusBarColor: Colors.transparent, // transparent status bar
     ));
     WidgetsBinding.instance.handlePlatformBrightnessChanged();

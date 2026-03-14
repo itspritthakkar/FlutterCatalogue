@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../core/store.dart';
-import '../../models/CartModel.dart';
-import '../../models/CatalogModel.dart';
-
+import '../../models/cart_model.dart';
+import '../../models/catalog_model.dart';
 
 class AddToCart extends StatelessWidget {
   final Item catalog;
+
   const AddToCart({Key? key, required this.catalog}) : super(key: key);
 
   @override
@@ -18,14 +18,17 @@ class AddToCart extends StatelessWidget {
     bool? isInCart = _cart.items.contains(catalog);
     return InkWell(
         onTap: () async {
-          if (!isInCart) {
+          if (isInCart) {
+            RemoveMutation(catalog);
+          }else{
             AddMutation(catalog);
           }
         },
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: isInCart ? const Icon(CupertinoIcons.check_mark_circled_solid) : const Icon(CupertinoIcons.cart_badge_plus),
-        )
-    );
+          child: isInCart
+              ? const Icon(CupertinoIcons.check_mark_circled_solid)
+              : const Icon(CupertinoIcons.cart_badge_plus),
+        ));
   }
 }

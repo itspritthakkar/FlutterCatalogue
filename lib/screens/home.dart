@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/models/CatalogModel.dart';
+import 'package:myapp/models/catalog_model.dart';
 import 'package:myapp/widgets/home_widgets/catalog_header.dart';
 import 'package:myapp/widgets/home_widgets/grid_layout.dart';
 import 'package:myapp/widgets/home_widgets/list_layout.dart';
+import 'package:http/http.dart' as http;
 
-// ignore: camel_case_types
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -17,47 +17,43 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  String currentLayout="grid";
-  bool isProcessing=false;
+  String currentLayout = "grid";
+  bool isProcessing = false;
+  final url = "https://www.immortal.org.in/ecom/index.php";
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     loadData();
   }
 
   loadData() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
+    await Future.delayed(const Duration(milliseconds: 1000));
+    final catalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
+    // final response = await http.get(Uri.parse(url));
+    // final catalogJson = response.body;
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
-    CatalogModel.items = List.from(productsData).map<Item>((item) => Item.fromMap(item)).toList();
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
     setState(() {});
   }
 
   changeLayout(String type) async {
-      isProcessing = true;
-      setState((){});
-      await Future.delayed(const Duration(seconds: 1));
-      if(type=="grid"){
-        currentLayout="grid";
-        setState(() {});
-      }else{
-        currentLayout="list";
-        setState(() {});
-      }
-      isProcessing = false;
-      setState((){});
+    setState(() {isProcessing = true;});
+    await Future.delayed(const Duration(seconds: 1));
+    if (type == "grid") {
+      setState(() {currentLayout = "grid";});
+    } else {
+      setState(() {currentLayout = "list";});
+    }
+    setState(() {isProcessing = false;});
   }
 
   @override
   Widget build(BuildContext context) {
-    bool valChanged = false;
-    void _redrawHome(bool isChanged) {
-      setState(() {valChanged=isChanged;});
-    }
-
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
@@ -66,8 +62,10 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CatalogHeader(onChanged: _redrawHome),
-              if (CatalogModel.items != null && CatalogModel.items!.isNotEmpty && isProcessing==false)
+              const CatalogHeader(),
+              if (CatalogModel.items != null &&
+                  CatalogModel.items!.isNotEmpty &&
+                  isProcessing == false)
                 Expanded(
                   child: CustomScrollView(
                     slivers: [
@@ -77,35 +75,31 @@ class _HomeState extends State<Home> {
                             Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
                                     "Layouts",
-                                    style: TextStyle(
-                                        fontSize: 20
-                                    ),
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                   Row(
                                     children: [
                                       Material(
                                         child: InkWell(
-                                          onTap: () => {
-                                            changeLayout("list")
-                                          },
+                                          onTap: () => {changeLayout("list")},
                                           child: const Icon(
-                                              CupertinoIcons.rectangle_grid_1x2,
+                                            CupertinoIcons.rectangle_grid_1x2,
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 10,),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
                                       Material(
                                         child: InkWell(
-                                          onTap: () => {
-                                            changeLayout("grid")
-                                          },
-                                          child: const Icon(
-                                              CupertinoIcons.rectangle_grid_2x2
-                                          ),
+                                          onTap: () => {changeLayout("grid")},
+                                          child: const Icon(CupertinoIcons
+                                              .rectangle_grid_2x2),
                                         ),
                                       ),
                                     ],
@@ -116,7 +110,9 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
-                      currentLayout=="grid" ? GridLayout(valChanged: valChanged): ListLayout(valChanged: valChanged)
+                      currentLayout == "grid"
+                          ? const GridLayout()
+                          : const ListLayout()
                     ],
                   ),
                 )

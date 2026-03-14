@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/CartModel.dart';
-import '../models/CatalogModel.dart';
+import '../models/cart_model.dart';
+import '../models/catalog_model.dart';
 
 class DeleteWidget extends StatelessWidget {
   final Item item;
